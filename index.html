@@ -5,16 +5,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description"
-		content="A tool to split a single image into multiple images based on a given height and width.">
-	<title>Multiple Image Splitter</title>
+		content="A powerful tool to split any image into multiple images based on customizable grid size, making it easy to download as a zip file.">
+	<title>Multiple Image Splitter - Split Your Images into Grid</title>
+	<meta name="keywords"
+		content="image splitter, image grid, image to grid, split image, image tools, download image as zip">
+	<meta name="author" content="Your Name">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<style>
+		/* Gradient background */
 		body {
 			font-family: Arial, sans-serif;
 			max-width: 1200px;
 			margin: 0 auto;
 			padding: 20px;
+			background: linear-gradient(135deg, #73a5ff, #5477f5);
+			color: #fff;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 2.5em;
+			margin-bottom: 30px;
+		}
+
+		label {
+			font-weight: bold;
 		}
 
 		.image-container {
@@ -23,6 +39,9 @@
 			margin-bottom: 20px;
 			border: 1px solid #ccc;
 			padding: 10px;
+			background-color: #fff;
+			color: #000;
+			border-radius: 10px;
 		}
 
 		.preview {
@@ -30,6 +49,8 @@
 			max-height: 200px;
 			object-fit: contain;
 			margin-right: 20px;
+			border: 2px solid #73a5ff;
+			border-radius: 5px;
 		}
 
 		.split-images-grid {
@@ -41,7 +62,8 @@
 			max-width: 100px;
 			max-height: 100px;
 			object-fit: contain;
-			border: 1px solid #ccc;
+			border: 2px solid #73a5ff;
+			border-radius: 5px;
 		}
 
 		#imageInput {
@@ -50,12 +72,63 @@
 
 		.download-all {
 			margin-top: 10px;
+			padding: 10px 20px;
+			background-color: #5477f5;
+			color: white;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		.download-all:hover {
+			background-color: #415dbb;
+		}
+
+		button {
+			padding: 10px 20px;
+			background-color: #5477f5;
+			color: white;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		button:hover {
+			background-color: #415dbb;
+		}
+
+		#loader {
+			margin-top: 20px;
+			text-align: center;
+			font-size: 1.2em;
+			color: #fff;
+		}
+
+		/* Responsive layout */
+		@media (max-width: 768px) {
+			.preview {
+				max-width: 150px;
+				max-height: 150px;
+			}
+
+			.split-image {
+				max-width: 80px;
+				max-height: 80px;
+			}
+
+			button,
+			.download-all {
+				width: 100%;
+			}
 		}
 	</style>
 </head>
 
 <body>
 	<h1>Multiple Image Splitter</h1>
+	<p>Upload an image, set the grid size, and split it into multiple images!</p>
 	<input type="file" id="imageInput" accept="image/*" multiple>
 	<br><br>
 	<label for="columns">Number of columns:</label>
@@ -210,7 +283,5 @@
 		}
 	</script>
 </body>
-
-
 
 </html>
