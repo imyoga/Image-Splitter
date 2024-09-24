@@ -1,4 +1,4 @@
-# Multiple Image Splitter
+# Multiple Image Splitter by rows and columns
 
 [Visit the Image Splitter Tool](https://multi-image-spitter.netlify.app/)
 
