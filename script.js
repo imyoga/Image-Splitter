@@ -225,19 +225,36 @@ function displayImage(img, index, fileName, fileSize) {
 	imageInfo.appendChild(fileName_span)
 	imageInfo.appendChild(fileDetails)
 	
-	// Preview image
+	// Image content container (side-by-side layout)
+	const imageContent = document.createElement('div')
+	imageContent.classList.add('image-content')
+	
+	// Preview section (left side)
+	const previewSection = document.createElement('div')
+	previewSection.classList.add('image-preview-section')
+	
 	const preview = document.createElement('img')
 	preview.src = img.src
 	preview.classList.add('preview')
 	
-	// Split images grid
+	previewSection.appendChild(preview)
+	
+	// Splits section (right side)
+	const splitsSection = document.createElement('div')
+	splitsSection.classList.add('image-splits-section')
+	
 	const splitImagesGrid = document.createElement('div')
 	splitImagesGrid.classList.add('split-images-grid')
 	splitImagesGrid.id = `splitImages-${index}`
 	
+	splitsSection.appendChild(splitImagesGrid)
+	
+	// Assemble the structure
+	imageContent.appendChild(previewSection)
+	imageContent.appendChild(splitsSection)
+	
 	imageContainer.appendChild(imageInfo)
-	imageContainer.appendChild(preview)
-	imageContainer.appendChild(splitImagesGrid)
+	imageContainer.appendChild(imageContent)
 	imagesContainer.appendChild(imageContainer)
 }
 
