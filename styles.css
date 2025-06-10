@@ -1,0 +1,109 @@
+/* Gradient background with light green */
+body {
+	font-family: Arial, sans-serif;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	background: linear-gradient(135deg, #73ffb3, #73a5ff);
+	color: #000;
+	font-size: 1.1em;
+	/* Slightly larger font */
+}
+
+h1 {
+	text-align: center;
+	font-size: 2.8em;
+	margin-bottom: 30px;
+}
+
+label {
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.image-container {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	background-color: #fff;
+	color: #000;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Add some shadow for effect */
+}
+
+.preview {
+	max-width: 200px;
+	max-height: 200px;
+	object-fit: contain;
+	margin-right: 20px;
+	border: 2px solid #73a5ff;
+	border-radius: 5px;
+}
+
+.split-images-grid {
+	display: grid;
+	gap: 10px;
+}
+
+.split-image {
+	max-width: 100px;
+	max-height: 100px;
+	object-fit: contain;
+	border: 2px solid #73a5ff;
+	border-radius: 5px;
+}
+
+#imageInput {
+	margin-bottom: 10px;
+}
+
+/* Updated button styles */
+button,
+.download-all {
+	padding: 12px 25px;
+	background-color: #4caf50;
+	/* Light green for buttons */
+	color: white;
+	border: 2px solid #3c8b40;
+	/* Border for better visibility */
+	cursor: pointer;
+	border-radius: 8px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	font-size: 1.1em;
+	/* Slightly bigger font for buttons */
+}
+
+button:hover,
+.download-all:hover {
+	background-color: #45a049;
+	transform: scale(1.05);
+	/* Scale effect on hover */
+}
+
+#loader {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 1.2em;
+	color: #fff;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+	.preview {
+		max-width: 150px;
+		max-height: 150px;
+	}
+
+	.split-image {
+		max-width: 80px;
+		max-height: 80px;
+	}
+
+	button,
+	.download-all {
+		width: 100%;
+	}
+} 
