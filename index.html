@@ -13,22 +13,127 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<h1>Multiple Image Splitter</h1>
-	<p>Upload an image, set the grid size, and split it into multiple images!</p>
-	<input type="file" id="imageInput" accept="image/*" multiple>
-	<br><br>
-	<label for="columns">Number of columns:</label>
-	<input type="number" id="columns" min="1" value="2">
-	<label for="rows">Number of rows:</label>
-	<input type="number" id="rows" min="1" value="2">
-	<br><br>
-	<button onclick="splitAllImages()">Split Images</button>
-	<div id="imagesContainer"></div>
+	<div class="container">
+		<header class="header">
+			<h1 class="title">
+				<span class="gradient-text">Image Splitter</span>
+			</h1>
+		</header>
 
-	<div id="loader" style="display:none;">Processing...</div> <!-- Loader element -->
+		<main class="main-layout">
+			<!-- Left Column - Controls -->
+			<div class="left-panel">
+				<div class="upload-section">
+					<div class="upload-area" id="uploadArea">
+						<div class="upload-icon">
+							<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</div>
+						<h3>Upload Images</h3>
+						<p>Click or drag & drop</p>
+						<input type="file" id="imageInput" accept="image/*" multiple>
+					</div>
+				</div>
+
+				<div class="controls-section">
+					<div class="controls-grid">
+						<div class="control-group">
+							<label for="columns" class="control-label">
+								<span class="label-icon">📊</span>
+								Columns
+							</label>
+							<div class="number-input-wrapper">
+								<input type="number" id="columns" min="1" max="20" value="2" class="control-input">
+								<div class="custom-arrows">
+									<button type="button" class="arrow-btn arrow-up" data-target="columns">
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+											<path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</button>
+									<button type="button" class="arrow-btn arrow-down" data-target="columns">
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+											<path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label for="rows" class="control-label">
+								<span class="label-icon">📋</span>
+								Rows
+							</label>
+							<div class="number-input-wrapper">
+								<input type="number" id="rows" min="1" max="20" value="2" class="control-input">
+								<div class="custom-arrows">
+									<button type="button" class="arrow-btn arrow-up" data-target="rows">
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+											<path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</button>
+									<button type="button" class="arrow-btn arrow-down" data-target="rows">
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+											<path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="split-button" onclick="splitAllImages()" id="splitButton" disabled>
+						<span class="button-text">Split Images</span>
+						<span class="button-icon">✨</span>
+					</button>
+				</div>
+
+				<div class="grid-preview-section">
+					<div class="preview-header">
+						<h4>Split Preview</h4>
+					</div>
+					<div class="grid-preview-container">
+						<div id="gridPreview" class="grid-preview"></div>
+					</div>
+				</div>
+
+				<div class="info-panel">
+					<div class="info-item">
+						<span class="info-label">Images:</span>
+						<span id="imageCount">0</span>
+					</div>
+					<div class="info-item">
+						<span class="info-label">Grid:</span>
+						<span id="gridInfo">2×2</span>
+					</div>
+					<div class="info-item">
+						<span class="info-label">Total Parts:</span>
+						<span id="totalParts">4</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right Column - Preview -->
+			<div class="right-panel">
+				<div class="preview-header">
+					<h3>Preview & Results</h3>
+				</div>
+				<div id="imagesContainer" class="images-container"></div>
+			</div>
+		</main>
+
+		<div id="loader" class="loader">
+			<div class="loader-spinner"></div>
+			<p class="loader-text">Processing your images...</p>
+		</div>
+	</div>
 
 	<script src="script.js"></script>
 </body>
